@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String
 
 # Pydantic
 from pydantic import BaseModel, EmailStr
+from typing import Optional
 
 # Database configuration.
 from config.database import Base
@@ -16,7 +17,6 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String, unique=True)
     password = Column(String)
-    token = Column(String)
     
 
 class UserIn(BaseModel):
@@ -24,3 +24,5 @@ class UserIn(BaseModel):
 
     email: EmailStr
     password: str
+    session_id : Optional[str] = None
+    

@@ -1,18 +1,16 @@
 # FastAPI
 from fastapi import FastAPI, HTTPException
 
-# Bcrypt
-import bcrypt
-
 # Local modules
+import uuid
 from models.users import User, UserIn
 from config.database import Base, Session, engine
-from utils.utils import encrypt_password, check_password, generate_token
+from utils.utils import encrypt_password
 
 
 
 app = FastAPI()
-app.title = "FastAPI login/logout API."
+app.title = "Login/logout API. 4ID"
 
 Base.metadata.create_all(bind=engine)
 
@@ -32,19 +30,11 @@ def signup(user: UserIn):
     hash_password = encrypt_password(user.password)
     new_user = User(**user.dict())
     new_user.password, user.password = hash_password, hash_password
+    new_user.session_id = str(uuid.uuid4())
 
-    new_user.token = generate_token(new_user.email, new_user.password)
     db.add(new_user)
     db.commit()
     return user
-
-
-@app.post("/login", tags=["Login"], response_model=dict, status_code=200)
-def login(user: UserIn):
-    """Logs in existing users."""
-
-    db = Session()
-    verified = check_password(db, user)
 
 
 @app.post("/logout", tags=["Logout"], response_model=dict, status_code=200)
@@ -54,7 +44,7 @@ def logout(email: str):
     db = Session()
     result = db.query(User).filter(User.email == email).first()
     if not result:
-        raise HTTPException(400, "Email not found in database.")
+        raise HTTPException(400, "Email not found.")
     db.delete(result)
     db.commit()
     return 
