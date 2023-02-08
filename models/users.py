@@ -17,6 +17,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String, unique=True)
     password = Column(String)
+    session_id = Column(String, default=None)
     
 
 class UserIn(BaseModel):
@@ -24,5 +25,4 @@ class UserIn(BaseModel):
 
     email: EmailStr
     password: str
-    session_id : Optional[str] = None
     

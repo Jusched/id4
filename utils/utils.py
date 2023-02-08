@@ -1,15 +1,5 @@
-# FastAPI
-from fastapi import HTTPException
-
 # bcrypt
 import bcrypt
-
-# PyJWT
-import jwt
-
-# Local modules
-from models.users import User
-from config.database import Session
 
 
 def encrypt_password(password):

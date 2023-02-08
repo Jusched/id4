@@ -1,12 +1,11 @@
 # FastAPI
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
 
 # Local modules
 import uuid
 from models.users import User, UserIn
 from config.database import Base, Session, engine
 from utils.utils import encrypt_password
-
 
 
 app = FastAPI()
@@ -42,12 +41,17 @@ def logout(email: str):
     """Logs out the user based on provided email."""
 
     db = Session()
-    result = db.query(User).filter(User.email == email).first()
-    if not result:
+    user = db.query(User).filter(User.email == email).first()
+    if not user:
         raise HTTPException(400, "Email not found.")
-    db.delete(result)
+    
+    if not user.session_id:
+        raise HTTPException(400, "Email is already logged out.")
+    
+    user.session_id = None
+    db.add(user)
     db.commit()
-    return 
+    return Response(content="Logged out successfully.")
 
 
 @app.get("/clear", tags=["Database"],status_code=204)
