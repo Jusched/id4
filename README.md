@@ -10,10 +10,11 @@ This is a FastAPI application that provides endpoints for user signup and logout
 
 ## Usage
 
-1. Install the required packages by running `pip install -r requirements.txt`
-2. Run the application by executing `uvicorn main:app --reload`
-3. Signup a user by making a `POST` request to `/signup` with a JSON payload containing `email` and `password`. The `email` must be unique and the `password` must be longer than 8 characters.
-4. Logout a user by making a `POST` request to `/logout` with a JSON payload containing the `email` of the user.
+1. Clone the repository by executing git clone `https://github.com/Jusched/id4.git`
+2. Install the required packages by running `pip install -r requirements.txt`
+3. Run the application by executing `uvicorn main:app --reload`
+4. Signup a user by making a `POST` request to `/signup` with a JSON payload containing `email` and `password`. The `email` must be unique and the `password` must be longer than 8 characters.
+5. Logout a user by making a `POST` request to `/logout` with a JSON payload containing the `email` of the user.
 
 ## Endpoints
 
