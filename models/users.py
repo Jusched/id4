@@ -1,12 +1,16 @@
-# Pydantic
-from pydantic import BaseModel, Field, EmailStr
+# SQLAlchemy
+from sqlalchemy import Column, Integer, String
+
+# Database configuration.
+from ..config import Base
 
 
-class User(BaseModel):
+class User(Base):
     """User class for login/logout."""
 
-    email: EmailStr = Field(max_length=30)
-    hash_password: str
+    __tablename__ = "users"
 
+    id = Column(Integer, primary_key=True)
+    email = Column(String, unique=True)
+    password = Column(String)
     
-
