@@ -3,7 +3,6 @@ from sqlalchemy import Column, Integer, String
 
 # Pydantic
 from pydantic import BaseModel, EmailStr
-from typing import Optional
 
 # Database configuration.
 from config.database import Base

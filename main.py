@@ -72,7 +72,7 @@ def logout(email: str):
     db.add(user)
     db.commit()
     logging.info(f"User with email: {email} successfully logged out.")
-    return Response(content="Logged out successfully.")
+    return Response(content="Logged out successfully.", status_code=200)
 
 
 @app.get("/clear", tags=["Database"],status_code=204)
