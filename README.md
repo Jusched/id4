@@ -4,17 +4,20 @@
 
 This is a FastAPI application that provides endpoints for user signup and logout.
 
-## Requirements
+## Prerequisites
 
 - Python 3.6+
 
 ## Usage
 
 1. Clone the repository by executing `git clone https://github.com/Jusched/id4.git`
-2. Install the required packages by running `pip install -r requirements.txt`
-3. Run the application by executing `uvicorn main:app --reload`
-4. Signup a user by making a `POST` request to `/signup` with a JSON payload containing `email` and `password`. The `email` must be unique and the `password` must be longer than 8 characters.
-5. Logout a user by making a `POST` request to `/logout` with a JSON payload containing the `email` of the user.
+2. Go to the project folder by running `cd id4`
+3. Create a virtual environment to avoid installing packages globally with `python3 -m venv venv`
+4. Activate your virtual environment by running `source venv/bin/activate` in your Terminal.
+5. Install the required packages by running `pip install -r requirements.txt`
+6. Run the application by executing `uvicorn main:app --reload`
+7. Signup a user by making a `POST` request to `localhost:8000/signup` with a JSON payload containing `email` and `password`. The `email` must be unique and the `password` must be longer than 8 characters.
+8. Logout a user by making a `POST` request to `localhost:8000/logout` with a JSON payload containing the `email` of the user.
 
 ## Endpoints
 
